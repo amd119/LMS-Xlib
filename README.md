@@ -3,9 +3,16 @@
 
 ## Installation
 
-### Composer Packages 
+### Composer and NPM Packages
 ```
 composer install
+npm install
+```
+
+### Update Packages
+```
+composer update
+npm update
 ```
 
 ## Configuration
@@ -18,6 +25,11 @@ cp .env.example .env
 ### Generate Laravel App Key
 ```
 php artisan key:generate
+```
+
+### Create a Symbolic Link
+```
+php artisan storage:link
 ```
 
 ### Database Integration
@@ -35,10 +47,6 @@ php artisan db:seed
 ```
 
 ## Run App
-Install NPM packages first
-```
-npm install
-```
 
 Run local web server
 ```
