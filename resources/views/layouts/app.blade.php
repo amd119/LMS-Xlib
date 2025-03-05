@@ -20,10 +20,12 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased"
-        x-data="{ darkMode: localStorage.getItem('dark') === 'true' }"
-        x-init="$watch('darkMode', val => localStorage.setItem('dark', val))"
-        x-bind:class="{'dark': darkMode}"
-        x-cloak
+        @if (Auth::user()?->Role === 'Peminjam')
+            x-data="{ darkMode: localStorage.getItem('dark') === 'true' }"
+            x-init="$watch('darkMode', val => localStorage.setItem('dark', val))"
+            x-bind:class="{'dark': darkMode}"
+            x-cloak
+        @endif
     >
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')

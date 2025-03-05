@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="{{ Auth::user()?->Role === 'Peminjam' ? 'bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700' : 'bg-white border-b border-gray-100' }}"">
 
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10">

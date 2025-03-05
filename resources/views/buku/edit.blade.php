@@ -24,7 +24,7 @@
                                 <label for="Cover">Edit Cover</label>
                                 <img src="{{ asset('storage/uploads/' . $buku->Cover) }}" alt="Cover" class="img-thumbnail mb-2">
                                 <input type="file" name="Cover" id="Cover" class="form-control">
-                                <small class="form-text text-muted">Biarkan tidak terganti.</small>
+                                {{-- <small class="form-text text-muted">Biarkan tidak terganti.</small> --}}
                             </div>
                             <div class="form-group">
                                 <label for="KategoriID">Kategori</label>
