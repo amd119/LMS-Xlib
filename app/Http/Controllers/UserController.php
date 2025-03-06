@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
 
+use App\Models\User;
+
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\UserStoreRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Redirect;
 
@@ -32,7 +35,7 @@ class UserController extends Controller
         return view('user.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(UserStoreRequest $request): RedirectResponse
     {
         $request->validate([
             'username' => 'required|unique:users',
@@ -71,14 +74,17 @@ class UserController extends Controller
         return redirect()->route('user.home')->with('success', 'User data updated successfully.');
     }
 
-    public function destroy($id): RedirectResponse
+    public function delete($id): JsonResponse
     {
-        $user = User::find($id);
-        if (!$user) {
-            return redirect()->back()->with('error', 'Pengguna tidak ditemukan.');
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            
+            session()->flash('success', 'User berhasil dihapus.');
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            session()->flash('error', 'Gagal menghapus user: ' . $e->getMessage());
+            return response()->json(['success' => false], 500);
         }
-
-        $user->delete();
-        return redirect()->route('user.home')->with('success', 'Data pengguna berhasil dihapus.');
     }
 }

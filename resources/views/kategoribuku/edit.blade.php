@@ -9,7 +9,10 @@
                 @method('PUT')
                     <div class="form-group">
                         <label for="NamaKategori">Nama Kategori</label>
-                        <input type="text" id="NamaKategori" name="NamaKategori" class="form-control" value="{{ old('NamaKategori', $data['NamaKategori']) }}" required>
+                        <input type="text" id="NamaKategori" name="NamaKategori" class="form-control @error('NamaKategori') is-invalid @enderror" value="{{ old('NamaKategori', $data->NamaKategori) }}" required>
+                        @error('NamaKategori')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">

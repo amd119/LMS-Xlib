@@ -17,7 +17,7 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div>
+        <div class="mt-4">
             <x-input-label for="NamaLengkap" :value="__('Nama Lengkap')" />
             <x-text-input id="NamaLengkap" class="block mt-1 w-full" type="text" name="NamaLengkap" :value="old('NamaLengkap')" required autofocus autocomplete="Username" />
             <x-input-error :messages="$errors->get('NamaLengkap')" class="mt-2" />
@@ -41,7 +41,7 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-3">
           <a href="{{ route('user.home') }}" class="btn btn-outline-danger">Batal</a>
           <button type="submit" class="btn btn-outline-primary float-right">Tambah Data</button>
         </div>

@@ -80,7 +80,7 @@ Route::middleware(['auth', 'role:Administrator'])->group(function () {
     Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::delete('/user/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+    Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 });
 
 Route::middleware('auth')->group(function () {

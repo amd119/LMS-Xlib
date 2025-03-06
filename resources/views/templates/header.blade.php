@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <?php
         $helper = new \App\Helpers\HelpersFunctions();
@@ -8,6 +8,7 @@
     ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('/adminlte/plugins/fontawesome-free/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('/adminlte/css/adminlte.css') }}">
@@ -19,6 +20,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 
     <div class="wrapper">
@@ -115,35 +117,6 @@
                                 </ul>
                             </li>
                         @endif
-
-                        {{-- @if (Auth::user()?->Role === 'Peminjam')
-                            <li class="nav-item has-treeview {{ request()->is('perpustakaan', 'peminjaman', 'koleksi') ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link {{ request()->is('perpustakaan', 'peminjaman', 'koleksi') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-save"></i>
-                                    <p>Perpustakaan<i class="right fas fa-angle-left"></i></p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('perpustakaan.home') }}" class="nav-link {{ request()->is('perpustakaan') ? 'active' : '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Daftar Buku</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('peminjaman.home') }}" class="nav-link {{ request()->is('peminjaman') ? 'active' : '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Buku Pinjaman</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('koleksi.home') }}" class="nav-link {{ request()->is('koleksi') ? 'active' : '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Koleksi Pribadi</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif --}}
 
                         <li class="nav-item">
                             <a href="{{ route('logout') }}" class="nav-link"

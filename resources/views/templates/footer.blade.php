@@ -20,6 +20,7 @@ All rights reserved.
 <script src="{{ asset('/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('/adminlte/js/adminlte.js') }}"></script>
+
 @if(session('alert'))
 <script>
 Swal.fire({
@@ -30,6 +31,7 @@ Swal.fire({
 });
 </script>
 @endif
+
 <script>
 $(function () {
 $("#example1").DataTable({
@@ -37,5 +39,37 @@ $("#example1").DataTable({
 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 });
 </script>
+
+
+
+
+
+<!-- confirm delete buku -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".delete-btn").forEach(button => {
+            button.addEventListener("click", function(event) {
+                event.preventDefault(); 
+                let bukuId = this.getAttribute("data-id");
+
+                Swal.fire({
+                    title: "Apakah Anda yakin?",
+                    text: "Buku ini akan dihapus secara permanen!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Ya, hapus!",
+                    cancelButtonText: "Batal"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-buku-form-' + bukuId).submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

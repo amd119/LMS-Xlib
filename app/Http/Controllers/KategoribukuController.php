@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\KategoribukuStoreRequest;
+use App\Http\Requests\KategoribukuUpdateRequest;
+
 use App\Models\Buku;
 use App\Models\KategoriBuku;
-
+use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -35,13 +38,9 @@ class KategoribukuController extends Controller
         return view('kategoribuku.create');
     }
 
-    public function store(Request $request)
+    public function store(KategoribukuStoreRequest $request)
     {
         try {
-            $request->validate([
-                'NamaKategori' => 'required|string|max:255',
-            ]);
-
             $kategoriBuku = new KategoriBuku();
             $kategoriBuku->NamaKategori = $request->NamaKategori;
 
@@ -64,13 +63,9 @@ class KategoribukuController extends Controller
         return view('kategoribuku.edit', compact('data'));
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(KategoribukuStoreRequest $request, $id): RedirectResponse
     {
         try {
-            $request->validate([
-                'NamaKategori' => 'required|string|max:255',
-            ]);
-
             $kategoriBuku = KategoriBuku::findOrFail($id);
             $kategoriBuku->NamaKategori = $request->NamaKategori;
 
@@ -86,7 +81,7 @@ class KategoribukuController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete($id): JsonResponse
 	{
 		try {
             $kategoriBuku = KategoriBuku::findOrFail($id);
